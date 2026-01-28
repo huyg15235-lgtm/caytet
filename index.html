@@ -9,34 +9,33 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:Segoe UI, sans-serif;
-  min-height:100vh;
+  height:100vh;
   background:
-    radial-gradient(circle at top,#ffebc1,#ffb703,#b80000);
+    radial-gradient(circle at top,#fff1c1,#ffb703,#b80000);
   overflow:hidden;
-  color:#4a2c00;
 }
 
-/* ==== HOA + PHÁO HOA NỀN ==== */
-.bg{
+/* ==== PHÁO HOA NỀN ==== */
+canvas{
   position:fixed;
   inset:0;
-  pointer-events:none;
-  background:
-    url("https://i.imgur.com/1ZQZ1Zg.png") repeat;
-  opacity:.15;
+  z-index:0;
 }
 
 /* ==== TIÊU ĐỀ ==== */
 h1{
+  position:relative;
+  z-index:2;
   text-align:center;
-  margin:20px 10px;
+  margin:20px;
   color:#b80000;
-  text-shadow:0 0 10px gold;
+  text-shadow:0 0 15px gold;
 }
 
 /* ==== CÂY ==== */
 .tree{
   position:relative;
+  z-index:2;
   width:100%;
   height:65vh;
   display:flex;
@@ -44,63 +43,52 @@ h1{
   align-items:flex-end;
 }
 
-.branch{
-  position:absolute;
-  width:12px;
-  height:260px;
+.trunk{
+  width:14px;
+  height:280px;
   background:#7a3b00;
   border-radius:10px;
-  bottom:0;
+  position:relative;
 }
 
-.branch::before,
-.branch::after{
+.trunk::before,
+.trunk::after{
   content:"";
   position:absolute;
   width:10px;
-  height:120px;
+  height:130px;
   background:#7a3b00;
   border-radius:10px;
-  top:30px;
+  top:40px;
 }
 
-.branch::before{left:-40px;transform:rotate(-35deg)}
-.branch::after{right:-40px;transform:rotate(35deg)}
+.trunk::before{left:-45px;transform:rotate(-35deg)}
+.trunk::after{right:-45px;transform:rotate(35deg)}
 
 /* ==== LÌ XÌ ==== */
 .lixis{
   position:absolute;
-  top:20px;
+  top:40px;
   width:100%;
   display:flex;
   justify-content:center;
-  gap:20px;
+  gap:22px;
   flex-wrap:wrap;
 }
 
 .lixi{
-  width:70px;
-  height:90px;
+  width:72px;
+  height:92px;
   cursor:pointer;
   transition:.3s;
 }
 
-.lixi:hover{
-  transform:scale(1.15) rotate(-3deg);
-}
+.lixi:hover{transform:scale(1.2) rotate(-5deg)}
+.lixi.disabled{opacity:.35;pointer-events:none}
 
-.lixi.disabled{
-  opacity:.3;
-  pointer-events:none;
-}
+.lixi svg{width:100%;height:100%}
 
-/* SVG lì xì */
-.lixi svg{
-  width:100%;
-  height:100%;
-}
-
-/* ==== HỘP LỜI CHÚC ==== */
+/* ==== POPUP ==== */
 .popup{
   position:fixed;
   inset:0;
@@ -109,22 +97,22 @@ h1{
   justify-content:center;
   align-items:center;
   visibility:hidden;
+  z-index:5;
 }
-
 .popup.show{visibility:visible}
 
 .card{
   background:#fff8e6;
   max-width:520px;
   padding:30px;
-  border-radius:20px;
+  border-radius:22px;
   box-shadow:0 30px 80px rgba(0,0,0,.5);
   position:relative;
-  animation:scaleIn .6s ease;
+  animation:zoom .6s ease;
 }
 
-@keyframes scaleIn{
-  from{transform:scale(.6);opacity:0}
+@keyframes zoom{
+  from{transform:scale(.5);opacity:0}
   to{transform:scale(1);opacity:1}
 }
 
@@ -137,25 +125,24 @@ h1{
 }
 
 .card h2{
-  text-align:center;
   color:#b80000;
+  text-align:center;
   margin-bottom:15px;
 }
 
 /* ==== QUAY LẠI ==== */
 .back{
-  position:absolute;
-  bottom:15px;
-  width:100%;
+  position:relative;
+  z-index:2;
   text-align:center;
+  margin-top:10px;
 }
-
 .back a{
-  text-decoration:none;
   color:#fff;
   background:linear-gradient(45deg,#b80000,#ffcc33);
-  padding:12px 28px;
+  padding:12px 30px;
   border-radius:40px;
+  text-decoration:none;
   font-weight:bold;
   box-shadow:0 0 20px gold;
 }
@@ -164,15 +151,14 @@ h1{
 
 <body>
 
-<div class="bg"></div>
+<canvas id="firework"></canvas>
 
 <h1>🌸 CÂY ĐIỀU ƯỚC SỐ – LỚP 10A7 🌸</h1>
 
 <div class="tree">
-  <div class="branch"></div>
+  <div class="trunk"></div>
 
   <div class="lixis">
-    <!-- 8 LÌ XÌ -->
     <div class="lixi" onclick="openWish(0)"></div>
     <div class="lixi" onclick="openWish(1)"></div>
     <div class="lixi" onclick="openWish(2)"></div>
@@ -184,7 +170,6 @@ h1{
   </div>
 </div>
 
-<!-- POPUP -->
 <div class="popup" id="popup">
   <div class="card">
     <div class="close" onclick="closeWish()">✖</div>
@@ -197,6 +182,8 @@ h1{
   <a href="https://huyg15235-lgtm.github.io/tet10a7/#">⬅ Quay lại trang chính</a>
 </div>
 
+<audio id="sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0c7c60b09d.mp3"></audio>
+
 <script>
 /* SVG LÌ XÌ */
 document.querySelectorAll(".lixi").forEach(l=>{
@@ -205,37 +192,51 @@ document.querySelectorAll(".lixi").forEach(l=>{
     <rect x="5" y="5" width="90" height="120" rx="14" fill="#c00000"/>
     <rect x="45" y="5" width="10" height="120" fill="#ffcc33"/>
     <rect x="5" y="60" width="90" height="10" fill="#ffcc33"/>
-    <text x="50" y="80" text-anchor="middle"
-      font-size="26" fill="gold" font-weight="bold">福</text>
+    <text x="50" y="85" text-anchor="middle"
+      font-size="28" fill="gold" font-weight="bold">福</text>
   </svg>`;
 });
 
-/* ĐIỀU ƯỚC */
 const wishes=[
-"Chúc bạn học tập tiến bộ, đạt nhiều thành tích tốt trong năm mới 🌟",
-"Mong bạn luôn mạnh khỏe, vui vẻ và tràn đầy năng lượng ✨",
-"Chúc gia đình bạn một năm an khang, hạnh phúc và bình an 🏮",
-"Mong bạn luôn tự tin, dám ước mơ và dám thực hiện 🎯",
-"Chúc tình bạn 10A7 mãi bền chặt và nhiều kỷ niệm đẹp 💖",
-"Mong năm mới mang đến nhiều cơ hội và thành công 🎉",
-"Chúc bạn luôn chăm chỉ, kiên trì và không bỏ cuộc 📚",
-"Chúc một năm mới rực rỡ như hoa xuân 🌸"
+"Chúc bạn học tập tiến bộ, đạt nhiều thành tích rực rỡ 🌟",
+"Mong bạn luôn mạnh khỏe và tràn đầy năng lượng ✨",
+"Chúc gia đình an khang – hạnh phúc – bình an 🏮",
+"Mong bạn luôn tự tin theo đuổi ước mơ 🎯",
+"Chúc tình bạn 10A7 luôn bền chặt 💖",
+"Mong năm mới mang đến nhiều thành công 🎉",
+"Chúc bạn kiên trì, chăm chỉ và không bỏ cuộc 📚",
+"Chúc năm mới rực rỡ như hoa xuân 🌸"
 ];
 
 let chosen=false;
 
-/* MỞ */
 function openWish(i){
   if(chosen) return;
   chosen=true;
   document.getElementById("wishText").innerText=wishes[i];
   document.getElementById("popup").classList.add("show");
+  document.getElementById("sound").play();
   document.querySelectorAll(".lixi").forEach(l=>l.classList.add("disabled"));
 }
 
-/* ĐÓNG */
+/* ==== PHÁO HOA CHỮ ==== */
+const c=document.getElementById("firework");
+const ctx=c.getContext("2d");
+c.width=innerWidth;c.height=innerHeight;
+
+function fireworksText(){
+  ctx.clearRect(0,0,c.width,c.height);
+  ctx.font="bold 60px Segoe UI";
+  ctx.fillStyle="gold";
+  ctx.textAlign="center";
+  ctx.fillText("10A7",c.width/2,c.height/2-20);
+  ctx.font="bold 36px Segoe UI";
+  ctx.fillText("HAPPY NEW YEAR 2026",c.width/2,c.height/2+40);
+}
+
 function closeWish(){
   document.getElementById("popup").classList.remove("show");
+  fireworksText();
 }
 </script>
 
