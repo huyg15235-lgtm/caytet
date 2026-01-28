@@ -2,133 +2,161 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Cây Điều Ước Tết 10A7</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cây Điều Ước Số – 10A7</title>
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box}
 body{
-  margin:0;
+  font-family:Segoe UI, sans-serif;
   min-height:100vh;
   background:
-    radial-gradient(circle at top,#ffdddd,#b30000),
-    linear-gradient(#a80000,#5c0000);
-  overflow-x:hidden;
-  font-family:'Segoe UI',sans-serif;
-  text-align:center;
-  color:#fff;
+    radial-gradient(circle at top,#ffebc1,#ffb703,#b80000);
+  overflow:hidden;
+  color:#4a2c00;
 }
 
-/* TIÊU ĐỀ */
+/* ==== HOA + PHÁO HOA NỀN ==== */
+.bg{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    url("https://i.imgur.com/1ZQZ1Zg.png") repeat;
+  opacity:.15;
+}
+
+/* ==== TIÊU ĐỀ ==== */
 h1{
-  margin:30px 10px 10px;
-  color:gold;
-  text-shadow:0 0 20px orange;
+  text-align:center;
+  margin:20px 10px;
+  color:#b80000;
+  text-shadow:0 0 10px gold;
 }
 
-/* CÂY ĐÀO */
+/* ==== CÂY ==== */
 .tree{
   position:relative;
-  margin:30px auto;
-  width:320px;
-}
-.branch{
-  width:6px;
-  height:240px;
-  background:#5b2c06;
-  margin:auto;
-  border-radius:10px;
+  width:100%;
+  height:65vh;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
 }
 
-/* LÌ XÌ */
-.envelopes{
+.branch{
+  position:absolute;
+  width:12px;
+  height:260px;
+  background:#7a3b00;
+  border-radius:10px;
+  bottom:0;
+}
+
+.branch::before,
+.branch::after{
+  content:"";
+  position:absolute;
+  width:10px;
+  height:120px;
+  background:#7a3b00;
+  border-radius:10px;
+  top:30px;
+}
+
+.branch::before{left:-40px;transform:rotate(-35deg)}
+.branch::after{right:-40px;transform:rotate(35deg)}
+
+/* ==== LÌ XÌ ==== */
+.lixis{
   position:absolute;
   top:20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:320px;
+  width:100%;
   display:flex;
+  justify-content:center;
+  gap:20px;
   flex-wrap:wrap;
-  justify-content:space-between;
 }
 
-.envelope{
+.lixi{
   width:70px;
   height:90px;
-  margin:10px;
   cursor:pointer;
   transition:.3s;
 }
-.envelope:hover{
-  transform:scale(1.15);
+
+.lixi:hover{
+  transform:scale(1.15) rotate(-3deg);
 }
 
-/* SVG LÌ XÌ */
-.envelope svg{
+.lixi.disabled{
+  opacity:.3;
+  pointer-events:none;
+}
+
+/* SVG lì xì */
+.lixi svg{
   width:100%;
   height:100%;
 }
 
-/* HỘP ĐIỀU ƯỚC */
-#wishBox{
+/* ==== HỘP LỜI CHÚC ==== */
+.popup{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.6);
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   visibility:hidden;
 }
-#wishBox.show{
-  visibility:visible;
-}
 
-.wish{
-  background:#fff7e0;
-  color:#7a0000;
+.popup.show{visibility:visible}
+
+.card{
+  background:#fff8e6;
+  max-width:520px;
   padding:30px;
   border-radius:20px;
-  max-width:320px;
-  animation:zoom 1s;
-  box-shadow:0 0 40px gold;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+  position:relative;
+  animation:scaleIn .6s ease;
 }
 
-@keyframes zoom{
-  from{transform:scale(0)}
-  to{transform:scale(1)}
+@keyframes scaleIn{
+  from{transform:scale(.6);opacity:0}
+  to{transform:scale(1);opacity:1}
 }
 
-/* PHÁO HOA */
-.firework{
-  position:fixed;
-  width:6px;
-  height:6px;
-  animation:boom 1.5s forwards;
-}
-@keyframes boom{
-  to{
-    box-shadow:
-      0 -120px gold,
-      85px -85px red,
-      120px 0 orange,
-      85px 85px gold,
-      0 120px yellow,
-      -85px 85px red,
-      -120px 0 orange,
-      -85px -85px gold;
-    opacity:0;
-  }
+.close{
+  position:absolute;
+  top:12px;
+  right:16px;
+  font-size:22px;
+  cursor:pointer;
 }
 
-/* QUAY LẠI */
-.back-home{
-  display:inline-block;
-  margin:40px auto 30px;
-  background:gold;
-  color:#7a0000;
-  padding:14px 26px;
-  border-radius:30px;
+.card h2{
+  text-align:center;
+  color:#b80000;
+  margin-bottom:15px;
+}
+
+/* ==== QUAY LẠI ==== */
+.back{
+  position:absolute;
+  bottom:15px;
+  width:100%;
+  text-align:center;
+}
+
+.back a{
   text-decoration:none;
-  font-weight:700;
+  color:#fff;
+  background:linear-gradient(45deg,#b80000,#ffcc33);
+  padding:12px 28px;
+  border-radius:40px;
+  font-weight:bold;
   box-shadow:0 0 20px gold;
 }
 </style>
@@ -136,126 +164,78 @@ h1{
 
 <body>
 
-<h1>🌸 CÂY ĐIỀU ƯỚC TẾT 10A7 🌸</h1>
-<p>(Mỗi người chỉ được chọn <strong>1</strong> bao lì xì)</p>
+<div class="bg"></div>
+
+<h1>🌸 CÂY ĐIỀU ƯỚC SỐ – LỚP 10A7 🌸</h1>
 
 <div class="tree">
   <div class="branch"></div>
 
-  <div class="envelopes">
-    <!-- 8 BAO LÌ XÌ -->
-    <div class="envelope" onclick="openWish(this)">
-      <svg viewBox="0 0 100 130">
-        <rect width="100" height="130" rx="15" fill="#c30000"/>
-        <text x="50" y="75" text-anchor="middle"
-              fill="gold" font-size="28" font-weight="bold">LỘC</text>
-      </svg>
-    </div>
-
-    <div class="envelope" onclick="openWish(this)">
-      <svg viewBox="0 0 100 130">
-        <rect width="100" height="130" rx="15" fill="#b00000"/>
-        <text x="50" y="75" text-anchor="middle"
-              fill="gold" font-size="26">TÀI</text>
-      </svg>
-    </div>
-
-    <div class="envelope" onclick="openWish(this)">
-      <svg viewBox="0 0 100 130">
-        <rect width="100" height="130" rx="15" fill="#d40000"/>
-        <text x="50" y="75" text-anchor="middle"
-              fill="gold" font-size="26">HỌC</text>
-      </svg>
-    </div>
-
-    <div class="envelope" onclick="openWish(this)">
-      <svg viewBox="0 0 100 130">
-        <rect width="100" height="130" rx="15" fill="#a80000"/>
-        <text x="50" y="75" text-anchor="middle"
-              fill="gold" font-size="26">ĐỖ</text>
-      </svg>
-    </div>
-
-    <div class="envelope" onclick="openWish(this)">
-      <svg viewBox="0 0 100 130">
-        <rect width="100" height="130" rx="15" fill="#c10000"/>
-        <text x="50" y="75" text-anchor="middle"
-              fill="gold" font-size="26">KHỎE</text>
-      </svg>
-    </div>
-
-    <div class="envelope" onclick="openWish(this)">
-      <svg viewBox="0 0 100 130">
-        <rect width="100" height="130" rx="15" fill="#b50000"/>
-        <text x="50" y="75" text-anchor="middle"
-              fill="gold" font-size="24">MAY</text>
-      </svg>
-    </div>
-
-    <div class="envelope" onclick="openWish(this)">
-      <svg viewBox="0 0 100 130">
-        <rect width="100" height="130" rx="15" fill="#d00000"/>
-        <text x="50" y="75" text-anchor="middle"
-              fill="gold" font-size="24">VUI</text>
-      </svg>
-    </div>
-
-    <div class="envelope" onclick="openWish(this)">
-      <svg viewBox="0 0 100 130">
-        <rect width="100" height="130" rx="15" fill="#aa0000"/>
-        <text x="50" y="75" text-anchor="middle"
-              fill="gold" font-size="22">THÀNH</text>
-      </svg>
-    </div>
+  <div class="lixis">
+    <!-- 8 LÌ XÌ -->
+    <div class="lixi" onclick="openWish(0)"></div>
+    <div class="lixi" onclick="openWish(1)"></div>
+    <div class="lixi" onclick="openWish(2)"></div>
+    <div class="lixi" onclick="openWish(3)"></div>
+    <div class="lixi" onclick="openWish(4)"></div>
+    <div class="lixi" onclick="openWish(5)"></div>
+    <div class="lixi" onclick="openWish(6)"></div>
+    <div class="lixi" onclick="openWish(7)"></div>
   </div>
 </div>
 
-<!-- HỘP ĐIỀU ƯỚC -->
-<div id="wishBox">
-  <div class="wish" id="wishText"></div>
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="card">
+    <div class="close" onclick="closeWish()">✖</div>
+    <h2>🧧 Điều Ước Năm Mới 🧧</h2>
+    <p id="wishText" style="line-height:1.8"></p>
+  </div>
 </div>
 
-<!-- QUAY LẠI -->
-<a href="https://huyg15235-lgtm.github.io/tet10a7/#"
-   class="back-home">
-⬅ Quay lại trang chính
-</a>
+<div class="back">
+  <a href="https://huyg15235-lgtm.github.io/tet10a7/#">⬅ Quay lại trang chính</a>
+</div>
 
 <script>
-let used=false;
+/* SVG LÌ XÌ */
+document.querySelectorAll(".lixi").forEach(l=>{
+  l.innerHTML=`
+  <svg viewBox="0 0 100 130">
+    <rect x="5" y="5" width="90" height="120" rx="14" fill="#c00000"/>
+    <rect x="45" y="5" width="10" height="120" fill="#ffcc33"/>
+    <rect x="5" y="60" width="90" height="10" fill="#ffcc33"/>
+    <text x="50" y="80" text-anchor="middle"
+      font-size="26" fill="gold" font-weight="bold">福</text>
+  </svg>`;
+});
+
+/* ĐIỀU ƯỚC */
 const wishes=[
-  "Chúc bạn học tập tiến bộ, đạt kết quả cao!",
-  "Chúc một năm mới nhiều niềm vui và may mắn!",
-  "Chúc sức khỏe dồi dào, tinh thần vững vàng!",
-  "Chúc thi cử suôn sẻ, đạt mục tiêu mơ ước!",
-  "Chúc luôn tự tin và tỏa sáng!",
-  "Chúc gia đình hạnh phúc, bình an!",
-  "Chúc tuổi trẻ rực rỡ và đầy trải nghiệm!",
-  "Chúc thành công trên con đường phía trước!"
+"Chúc bạn học tập tiến bộ, đạt nhiều thành tích tốt trong năm mới 🌟",
+"Mong bạn luôn mạnh khỏe, vui vẻ và tràn đầy năng lượng ✨",
+"Chúc gia đình bạn một năm an khang, hạnh phúc và bình an 🏮",
+"Mong bạn luôn tự tin, dám ước mơ và dám thực hiện 🎯",
+"Chúc tình bạn 10A7 mãi bền chặt và nhiều kỷ niệm đẹp 💖",
+"Mong năm mới mang đến nhiều cơ hội và thành công 🎉",
+"Chúc bạn luôn chăm chỉ, kiên trì và không bỏ cuộc 📚",
+"Chúc một năm mới rực rỡ như hoa xuân 🌸"
 ];
 
-function openWish(el){
-  if(used) return alert("⚠️ Bạn chỉ được chọn 1 bao lì xì!");
-  used=true;
+let chosen=false;
 
-  document.getElementById("wishText").innerHTML =
-    "🎊 " + wishes[Math.floor(Math.random()*wishes.length)];
-  document.getElementById("wishBox").classList.add("show");
-
-  fireworks();
+/* MỞ */
+function openWish(i){
+  if(chosen) return;
+  chosen=true;
+  document.getElementById("wishText").innerText=wishes[i];
+  document.getElementById("popup").classList.add("show");
+  document.querySelectorAll(".lixi").forEach(l=>l.classList.add("disabled"));
 }
 
-function fireworks(){
-  for(let i=0;i<15;i++){
-    setTimeout(()=>{
-      let f=document.createElement("div");
-      f.className="firework";
-      f.style.left=Math.random()*100+"vw";
-      f.style.top=Math.random()*60+"vh";
-      document.body.appendChild(f);
-      setTimeout(()=>f.remove(),1500);
-    },i*200);
-  }
+/* ĐÓNG */
+function closeWish(){
+  document.getElementById("popup").classList.remove("show");
 }
 </script>
 
