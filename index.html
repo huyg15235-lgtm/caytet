@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>🌸 Cây Điều Ước Số – 10A7</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif}
+body{
+  min-height:100vh;
+  background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+    url("https://i.imgur.com/7Z6ZKxP.jpg") center/cover no-repeat;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  color:#fff;
+}
+
+/* KHUNG CHÍNH */
+.container{
+  width:95%;
+  max-width:900px;
+  text-align:center;
+}
+
+/* TIÊU ĐỀ */
+h1{
+  font-size:42px;
+  color:#ffd86b;
+  margin-bottom:10px;
+}
+.sub{
+  opacity:.9;
+  margin-bottom:30px;
+}
+
+/* CÂY ĐÀO */
+.tree{
+  position:relative;
+  height:420px;
+  background:url("https://i.imgur.com/qgY4wEF.png") center/contain no-repeat;
+}
+
+/* BAO LÌ XÌ */
+.lixi{
+  position:absolute;
+  width:80px;
+  cursor:pointer;
+  transition:.4s;
+  animation:swing 4s ease-in-out infinite;
+}
+.lixi:hover{transform:scale(1.1)}
+@keyframes swing{
+  0%,100%{transform:rotate(2deg)}
+  50%{transform:rotate(-2deg)}
+}
+
+/* VỊ TRÍ BAO */
+.l1{top:80px;left:180px}
+.l2{top:120px;right:220px}
+.l3{top:220px;left:300px}
+.l4{top:200px;right:320px}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
+}
+.modal.active{display:flex}
+
+/* THƯ */
+.card{
+  background:linear-gradient(135deg,#b30000,#ff3b3b);
+  padding:30px;
+  width:90%;
+  max-width:500px;
+  border-radius:20px;
+  animation:open .8s ease;
+  box-shadow:0 0 30px gold;
+}
+@keyframes open{
+  from{transform:scale(.7);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+.card h2{
+  color:#ffd86b;
+  margin-bottom:15px;
+}
+.card p{
+  line-height:1.7;
+  font-size:18px;
+}
+
+/* NÚT */
+.btn{
+  margin-top:20px;
+  padding:10px 20px;
+  border:none;
+  border-radius:25px;
+  background:gold;
+  font-weight:bold;
+  cursor:pointer;
+}
+.note{
+  margin-top:15px;
+  opacity:.85;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🌸 CÂY ĐIỀU ƯỚC SỐ 10A7</h1>
+  <div class="sub">Mỗi người chỉ nhận <b>1 điều ước</b> đầu xuân 🌱</div>
+
+  <div class="tree">
+    <img class="lixi l1" src="https://i.imgur.com/w6d4JXj.png" onclick="openWish()">
+    <img class="lixi l2" src="https://i.imgur.com/w6d4JXj.png" onclick="openWish()">
+    <img class="lixi l3" src="https://i.imgur.com/w6d4JXj.png" onclick="openWish()">
+    <img class="lixi l4" src="https://i.imgur.com/w6d4JXj.png" onclick="openWish()">
+  </div>
+
+  <div class="note">🎋 Hãy chọn một bao lì xì để nhận điều ước của bạn</div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="card">
+    <h2>🧧 Điều Ước Đầu Xuân</h2>
+    <p id="wish"></p>
+    <button class="btn" onclick="closeWish()">Đóng</button>
+  </div>
+</div>
+
+<script>
+const wishes=[
+"Chúc bạn năm mới học tập tiến bộ, đạt được mục tiêu mình mong muốn.",
+"Mong bạn luôn tự tin, mạnh mẽ và không ngừng theo đuổi ước mơ.",
+"Chúc bạn và gia đình luôn bình an, hạnh phúc và tràn đầy yêu thương.",
+"Năm mới chúc bạn có thật nhiều kỷ niệm đẹp cùng thầy cô và bạn bè.",
+"Chúc bạn đủ kiên trì để vượt qua thử thách và đủ dũng cảm để tỏa sáng.",
+"Mong rằng mỗi ngày đến trường của bạn đều là một ngày vui."
+];
+
+function openWish(){
+  if(localStorage.getItem("daNhanUoc")){
+    alert("🌸 Bạn đã nhận điều ước rồi nhé!");
+    return;
+  }
+  const random=wishes[Math.floor(Math.random()*wishes.length)];
+  document.getElementById("wish").innerText=random;
+  document.getElementById("modal").classList.add("active");
+  localStorage.setItem("daNhanUoc","yes");
+}
+
+function closeWish(){
+  document.getElementById("modal").classList.remove("active");
+}
+</script>
+
+</body>
+</html>
