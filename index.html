@@ -2,170 +2,206 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>🧧 Cây Điều Ước Số 10A7</title>
+<title>🌸 Cây Điều Ước Số 10A7 🌸</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif}
 body{
-  min-height:100vh;
+  margin:0;
+  height:100vh;
+  font-family:'Segoe UI',sans-serif;
   background:
-    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
-    url("https://i.imgur.com/7Z6ZKxP.jpg") center/cover no-repeat;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+    linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.6)),
+    url("https://images.unsplash.com/photo-1549693578-d683be217e58?auto=format&fit=crop&w=1600&q=80");
+  background-size:cover;
+  background-position:center;
   overflow:hidden;
-}
-
-.container{
-  width:95%;
-  max-width:1000px;
-  text-align:center;
   color:#fff;
 }
 
-h1{
-  font-size:42px;
-  color:gold;
-  text-shadow:0 0 15px gold;
+/* TIÊU ĐỀ */
+header{
+  text-align:center;
+  padding:30px 10px;
 }
-.sub{margin:10px 0 25px;font-size:18px;opacity:.9}
+header h1{
+  color:#ffeb3b;
+  text-shadow:0 0 15px rgba(255,215,0,.9);
+}
+header p{
+  opacity:.9;
+}
 
-/* CÂY ĐÀO */
+/* CÂY */
 .tree{
-  position:relative;
-  height:480px;
-  background:url("https://i.imgur.com/Y5o3E7J.png") center/contain no-repeat;
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:420px;
+  height:520px;
 }
 
-/* BAO LÌ XÌ */
+/* CÀNH ĐÀO */
+.branch{
+  position:absolute;
+  width:300px;
+  height:12px;
+  background:#5a2a00;
+  border-radius:10px;
+  transform-origin:left center;
+}
+.branch.one{top:120px;left:120px;transform:rotate(-20deg)}
+.branch.two{top:180px;left:120px;transform:rotate(10deg)}
+.branch.three{top:250px;left:120px;transform:rotate(-5deg)}
+
+/* HOA */
+.flower{
+  position:fixed;
+  top:-40px;
+  font-size:22px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg)}
+}
+
+/* BAO LÌ XÌ SVG */
 .lixi{
   position:absolute;
-  width:85px;
+  width:70px;
   cursor:pointer;
-  animation:swing 4s ease-in-out infinite;
-  transition:.4s;
-}
-.lixi:hover{
-  transform:scale(1.15);
-  filter:drop-shadow(0 0 12px gold);
+  animation:swing 3s ease-in-out infinite;
 }
 @keyframes swing{
-  0%,100%{transform:rotate(2deg)}
-  50%{transform:rotate(-2deg)}
+  0%,100%{transform:rotate(-3deg)}
+  50%{transform:rotate(3deg)}
 }
-
-/* VỊ TRÍ */
-.l1{top:90px;left:210px}
-.l2{top:130px;right:260px}
-.l3{top:250px;left:360px}
-.l4{top:230px;right:360px}
-.l5{top:180px;left:500px}
-
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.8);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:10;
-}
-.modal.active{display:flex}
+.lixi:hover{transform:scale(1.1)}
 
 /* THƯ */
-.card{
-  background:linear-gradient(135deg,#b30000,#ff3b3b);
-  padding:35px;
-  width:90%;
-  max-width:520px;
-  border-radius:25px;
-  box-shadow:0 0 45px gold;
-  animation:open 1s ease;
+.letter{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  width:80%;
+  max-width:500px;
+  background:#fff8e7;
+  color:#333;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+  transition:.8s;
+  z-index:10;
 }
-@keyframes open{
-  from{transform:scale(.6);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-.card h2{
-  color:gold;
-  margin-bottom:15px;
-}
-.card p{
-  font-size:18px;
-  line-height:1.7;
-}
-
-/* NÚT */
-.btn{
-  margin-top:25px;
-  padding:12px 30px;
-  border:none;
-  border-radius:30px;
-  background:gold;
-  font-weight:bold;
+.letter.show{transform:translate(-50%,-50%) scale(1)}
+.close{
+  position:absolute;
+  top:12px;
+  right:16px;
   cursor:pointer;
+  font-size:20px;
 }
 
-.note{
-  margin-top:20px;
-  font-size:15px;
-  opacity:.9;
+/* QUAY LẠI */
+.back-home{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  background:linear-gradient(45deg,#ffcc33,#ff9900);
+  color:#7a0000;
+  padding:12px 22px;
+  border-radius:30px;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 0 18px rgba(255,200,50,.9);
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <h1>🌸 CÂY ĐIỀU ƯỚC SỐ 10A7</h1>
-  <div class="sub">Mỗi bao lì xì – Một điều ước đầu xuân 🧧</div>
+<header>
+  <h1>🌸 CÂY ĐIỀU ƯỚC SỐ 10A7 🌸</h1>
+  <p>🎋 Mỗi bao lì xì – Một điều ước đầu xuân</p>
+</header>
 
-  <div class="tree">
-    <img class="lixi l1" src="https://i.imgur.com/F1YB9uX.png" onclick="openWish(0)">
-    <img class="lixi l2" src="https://i.imgur.com/F1YB9uX.png" onclick="openWish(1)">
-    <img class="lixi l3" src="https://i.imgur.com/F1YB9uX.png" onclick="openWish(2)">
-    <img class="lixi l4" src="https://i.imgur.com/F1YB9uX.png" onclick="openWish(3)">
-    <img class="lixi l5" src="https://i.imgur.com/F1YB9uX.png" onclick="openWish(4)">
+<!-- CÂY -->
+<div class="tree">
+  <div class="branch one"></div>
+  <div class="branch two"></div>
+  <div class="branch three"></div>
+
+  <!-- BAO LÌ XÌ -->
+  <div class="lixi" style="top:90px;left:240px" onclick="openWish()">
+    <svg viewBox="0 0 100 130">
+      <rect x="5" y="20" width="90" height="100" rx="12" fill="#c40000"/>
+      <rect x="5" y="20" width="90" height="30" fill="#a80000"/>
+      <circle cx="50" cy="70" r="18" fill="gold"/>
+      <text x="50" y="78" text-anchor="middle" fill="#c40000" font-size="22" font-weight="bold">福</text>
+    </svg>
   </div>
 
-  <div class="note">🎋 Chọn <b>một</b> bao lì xì để nhận điều ước</div>
-</div>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="card">
-    <h2>🧧 Điều Ước Đầu Xuân</h2>
-    <p id="wish"></p>
-    <button class="btn" onclick="closeWish()">Đóng</button>
+  <div class="lixi" style="top:160px;left:280px" onclick="openWish()">
+    <svg viewBox="0 0 100 130">
+      <rect x="5" y="20" width="90" height="100" rx="12" fill="#c40000"/>
+      <rect x="5" y="20" width="90" height="30" fill="#a80000"/>
+      <circle cx="50" cy="70" r="18" fill="gold"/>
+      <text x="50" y="78" text-anchor="middle" fill="#c40000" font-size="22" font-weight="bold">LỘC</text>
+    </svg>
   </div>
 </div>
+
+<!-- THƯ -->
+<div class="letter" id="letter">
+  <div class="close" onclick="closeWish()">✖</div>
+  <h3 style="color:#c40000;text-align:center">🎆 Điều Ước Đầu Xuân 🎆</h3>
+  <p id="wishText" style="margin-top:15px;line-height:1.7"></p>
+</div>
+
+<a href="https://huyg15235-lgtm.github.io/tet10a7/#" class="back-home">
+⬅ Quay lại trang chính
+</a>
 
 <script>
 const wishes=[
-"Chúc bạn năm mới học tập tiến bộ, thi cử thuận lợi.",
-"Mong bạn luôn tự tin, bản lĩnh và tỏa sáng.",
-"Chúc gia đình bạn một năm bình an, hạnh phúc.",
-"Mong bạn có nhiều bạn tốt và kỷ niệm đẹp ở 10A7.",
-"Chúc bạn đủ kiên trì để biến ước mơ thành hiện thực."
+"Chúc bạn học tập tiến bộ, đạt nhiều kết quả tốt trong năm mới 🌟",
+"Mong bạn luôn tự tin, mạnh mẽ và không ngừng tỏa sáng ✨",
+"Chúc tình bạn 10A7 mãi đoàn kết, yêu thương và gắn bó 🤝",
+"Mong năm mới mang đến sức khỏe, niềm vui và nhiều may mắn 🍀",
+"Chúc bạn dám ước mơ và đủ kiên trì để chinh phục ước mơ đó 🚀"
 ];
 
-function openWish(index){
-  if(localStorage.getItem("daNhanUoc")){
-    alert("🧧 Bạn đã nhận điều ước rồi nhé!");
-    return;
-  }
-  document.getElementById("wish").innerText=wishes[index];
-  document.getElementById("modal").classList.add("active");
-  localStorage.setItem("daNhanUoc","yes");
+let used=false;
+function openWish(){
+  if(used){alert("🌸 Bạn đã nhận điều ước rồi nhé!");return;}
+  used=true;
+  document.getElementById("wishText").innerText=
+    wishes[Math.floor(Math.random()*wishes.length)];
+  document.getElementById("letter").classList.add("show");
 }
 
 function closeWish(){
-  document.getElementById("modal").classList.remove("active");
+  document.getElementById("letter").classList.remove("show");
+}
+
+/* HOA RƠI */
+const flowers=["🌸","🌺"];
+for(let i=0;i<25;i++){
+  let f=document.createElement("div");
+  f.className="flower";
+  f.innerText=flowers[Math.floor(Math.random()*flowers.length)];
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=6+Math.random()*6+"s";
+  f.style.fontSize=18+Math.random()*18+"px";
+  document.body.appendChild(f);
 }
 </script>
-
+<a href="https://huyg15235-lgtm.github.io/tet10a7/#"
+   class="back-home">
+  ⬅ Quay lại trang chính
+</a>
+  
 </body>
 </html>
